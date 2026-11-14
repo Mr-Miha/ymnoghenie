@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#16835a">
+  <meta name="description" content="Тренажёр таблицы умножения с динозавриком Рексом: короткие объяснения, игры и коллекция.">
+  <title>Таблица умножения с Рексом — путешествие по джунглям</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A6%96%3C/text%3E%3C/svg%3E">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Рекс">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <noscript>
+    <p style="margin:0;padding:16px;background:#fff4ce;color:#5b3b00;text-align:center;font-weight:700">
+      Для игры нужно включить JavaScript в настройках браузера.
+    </p>
+  </noscript>
+  <svg class="svg-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+    <symbol id="rex-mascot" viewBox="0 0 240 210">
+      <ellipse cx="123" cy="192" rx="76" ry="12" fill="#0d4b32" opacity=".13"/>
+      <path d="M77 141C57 153 29 152 10 126c23 2 40-8 49-22 8 14 20 23 35 27z" fill="#2d9f63"/>
+      <path d="M67 124c-9-43 12-73 50-77 37-4 63 17 70 49 7 29-12 55-45 63-38 9-66-2-75-35z" fill="#39b473"/>
+      <path d="M117 50c5-18 23-29 43-25 17 3 29 17 31 33 2 16-7 30-23 35-17 5-36-2-45-15-7-10-9-19-6-28z" fill="#45bf7e"/>
+      <path d="M185 60c15-4 29 7 30 21 1 11-7 19-18 19l-18-9z" fill="#39b473"/>
+      <path d="M199 79c10 1 15 8 12 16-3 8-11 11-18 7" fill="#309f68"/>
+      <path d="M157 92c11 5 21 6 31 1" fill="none" stroke="#20784e" stroke-width="3.5" stroke-linecap="round"/>
+      <path d="M165 112c8 4 16 3 22-1" fill="none" stroke="#20784e" stroke-width="3" stroke-linecap="round" opacity=".8"/>
+      <circle cx="165" cy="55" r="12" fill="#f9fff9"/>
+      <circle cx="168" cy="56" r="6.5" fill="#183d2d"/>
+      <circle cx="170.5" cy="53" r="2.2" fill="#fff"/>
+      <circle cx="144" cy="79" r="7" fill="#ff9baf" opacity=".55"/>
+      <ellipse cx="135" cy="124" rx="31" ry="38" fill="#a5edc1" opacity=".86"/>
+      <path d="M71 75l10-16 9 18 10-15 8 19 11-12 4 22" fill="#ffd35e"/>
+      <path d="M78 140c-1 17-14 29-31 29-3-11 0-22 10-31z" fill="#2f9e64"/>
+      <path d="M135 151c7 17 23 24 39 18-1-12-9-22-23-27z" fill="#2f9e64"/>
+      <path d="M52 169c-5 1-8 0-11-2M73 170c-4 2-8 2-11 0M150 170c-5 1-8 0-11-2M170 169c-4 2-8 2-11 0" fill="none" stroke="#f7e6a6" stroke-width="3" stroke-linecap="round"/>
+      <path d="M184 116c13 0 20 7 20 15 0 8-7 13-15 11" fill="none" stroke="#2f9e64" stroke-width="13" stroke-linecap="round"/>
+      <path d="M102 94c8-6 18-8 27-5" fill="none" stroke="#2a9360" stroke-width="4" stroke-linecap="round" opacity=".55"/>
+      <path d="M120 42l6-12 7 12M137 40l7-11 4 13" fill="#ffd35e"/>
+      <circle cx="208" cy="49" r="4" fill="#ffd35e" opacity=".8"/>
+      <path d="M212 43l3 6-6 2z" fill="#ffd35e" opacity=".6"/>
+    </symbol>
+  </svg>
+
+  <div class="jungle-bg" aria-hidden="true">
+    <span style="--x:4%;--y:18%;--r:-18deg;--s:1.05;--d:0s">🌿</span>
+    <span style="--x:91%;--y:12%;--r:24deg;--s:.8;--d:-1.4s">🍃</span>
+    <span style="--x:84%;--y:72%;--r:12deg;--s:1.2;--d:-2.8s">🌿</span>
+    <span style="--x:8%;--y:76%;--r:35deg;--s:.7;--d:-3.6s">🍃</span>
+    <span style="--x:48%;--y:6%;--r:-35deg;--s:.6;--d:-2.1s">🌱</span>
+    <span style="--x:63%;--y:88%;--r:20deg;--s:.8;--d:-4.2s">🌿</span>
+  </div>
+
+  <header class="app-header">
+    <div class="header-inner">
+      <button class="brand" id="brandBtn" type="button" title="Вернуться на главную">
+        <span class="brand-mark" aria-hidden="true">🦖</span>
+        <span class="brand-text">
+          <strong>Рекс и таблица</strong>
+          <small>джунгли умножения</small>
+        </span>
+      </button>
+      <div class="header-tools">
+        <span class="header-note">🌿 Учись играя</span>
+        <button class="install-btn" id="installBtn" type="button" hidden>⬇️ Установить</button>
+        <button class="sound-toggle" id="soundToggle" type="button" aria-pressed="true" aria-label="Звук" title="Выключить звук">
+          <span class="sound-icon" aria-hidden="true">🔊</span>
+          <span class="sound-label">Звук</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="app">
+    <section id="screen-home" class="screen active" tabindex="-1" aria-labelledby="homeTitle">
+      <div class="home-hero">
+        <div class="hero-copy">
+          <span class="eyebrow">Путешествие по джунглям знаний</span>
+          <h1 id="homeTitle">Таблица умножения <span class="hero-accent">с Рексом</span></h1>
+          <p class="hero-text">Я Рекс. Разберём умножение, потренируемся и спасём динозавров!</p>
+          <div class="hero-actions">
+            <button class="btn btn-primary btn-lg" id="continueBtn" type="button">🌿 Продолжить обучение</button>
+            <button class="btn btn-secondary btn-lg" id="chooseNumberBtn" type="button">🥚 Выбрать число</button>
+          </div>
+          <div class="hero-stats">
+            <span class="stat-pill">🦕 <b id="statDinos">0</b> динозавров</span>
+            <span class="stat-pill">✅ <b id="statCorrect">0</b> верных ответов</span>
+          </div>
+        </div>
+        <div class="hero-dino">
+          <div class="speech hero-speech" id="homeSpeech" role="status">Привет! Выбери число на карте — и начнём приключение.</div>
+          <svg class="rex-svg rex-hero" viewBox="0 0 240 210" aria-hidden="true"><use href="#rex-mascot"></use></svg>
+          <div class="hero-ground" aria-hidden="true"><span>🌿</span><span>🌱</span><span>🌿</span></div>
+        </div>
+      </div>
+
+      <section class="map-section" id="mapSection" aria-labelledby="mapTitle">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Карта прогресса</span>
+            <h2 id="mapTitle">Выбери число</h2>
+            <p>Осваивай примеры — и расти своего динозавра.</p>
+          </div>
+          <div class="selected-pill">Тренируем <b>×<span class="js-active-number">3</span></b></div>
+        </div>
+        <div class="number-grid" id="numberGrid" role="group" aria-label="Выбор числа от 1 до 10"></div>
+        <div class="map-footer">
+          <div class="legend">
+            <span><i class="legend-dot legend-egg"></i>Яйцо</span>
+            <span><i class="legend-dot legend-crack"></i>Трещинка</span>
+            <span><i class="legend-dot legend-baby"></i>Малыш</span>
+            <span><i class="legend-dot legend-adult"></i>Взрослый</span>
+          </div>
+          <button class="btn btn-accent" id="startSelected" type="button">Играть с числом <span class="js-active-number">3</span> →</button>
+        </div>
+      </section>
+
+      <section class="modes-section" aria-labelledby="modesTitle">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Пять тропинок</span>
+            <h2 id="modesTitle">Выбери приключение</h2>
+            <p>Сначала пойми, потом потренируйся. И загляни в лабораторию.</p>
+          </div>
+        </div>
+        <div class="mode-grid">
+          <button class="mode-card" type="button" data-mode="learn" style="--mode-color:#2aa66b;--mode-soft:#e5fbee">
+            <span class="mode-icon" aria-hidden="true">🌿</span>
+            <span class="mode-copy">
+              <span class="mode-title">Изучаем и понимаем</span>
+              <span class="mode-desc">Группы яиц и сложение</span>
+              <span class="mode-number">Число ×<span class="js-active-number">3</span></span>
+            </span>
+            <span class="mode-arrow" aria-hidden="true">→</span>
+          </button>
+          <button class="mode-card" type="button" data-mode="feed" style="--mode-color:#e39b24;--mode-soft:#fff5dc">
+            <span class="mode-icon" aria-hidden="true">🌱</span>
+            <span class="mode-copy">
+              <span class="mode-title">Покорми динозавра</span>
+              <span class="mode-desc">Выбери лист с ответом</span>
+              <span class="mode-number">Число ×<span class="js-active-number">3</span></span>
+            </span>
+            <span class="mode-arrow" aria-hidden="true">→</span>
+          </button>
+          <button class="mode-card" type="button" data-mode="save" style="--mode-color:#d87545;--mode-soft:#fff0e7">
+            <span class="mode-icon" aria-hidden="true">🥚</span>
+            <span class="mode-copy">
+              <span class="mode-title">Спаси яйцо</span>
+              <span class="mode-desc">Введи ответ и спаси яйцо</span>
+              <span class="mode-number">Число ×<span class="js-active-number">3</span></span>
+            </span>
+            <span class="mode-arrow" aria-hidden="true">→</span>
+          </button>
+          <button class="mode-card" type="button" data-mode="table" style="--mode-color:#328fad;--mode-soft:#e7f8fd">
+            <span class="mode-icon" aria-hidden="true">🔲</span>
+            <span class="mode-copy">
+              <span class="mode-title">Таблица Пифагора</span>
+              <span class="mode-desc">Умножение как площадь</span>
+              <span class="mode-number">10 × 10</span>
+            </span>
+            <span class="mode-arrow" aria-hidden="true">→</span>
+          </button>
+          <button class="mode-card" type="button" data-mode="lab" style="--mode-color:#7a6bcf;--mode-soft:#f0edff">
+            <span class="mode-icon" aria-hidden="true">🔬</span>
+            <span class="mode-copy">
+              <span class="mode-title">Лаборатория умножения</span>
+              <span class="mode-desc">Двигай ползунки</span>
+              <span class="mode-number">Свободный режим</span>
+            </span>
+            <span class="mode-arrow" aria-hidden="true">→</span>
+          </button>
+          <button class="mode-card" type="button" data-mode="collection" style="--mode-color:#c26c22;--mode-soft:#fff3dd">
+            <span class="mode-icon" aria-hidden="true">🦕</span>
+            <span class="mode-copy">
+              <span class="mode-title">Коллекция динозавров</span>
+              <span class="mode-desc">Награды и интересные факты</span>
+              <span class="mode-number" id="collectionModeCount">0 из 67</span>
+            </span>
+            <span class="mode-arrow" aria-hidden="true">→</span>
+          </button>
+        </div>
+      </section>
+
+      <section class="collection-band" aria-labelledby="collectionBandTitle">
+        <div class="collection-info">
+          <span class="eyebrow">Твои находки</span>
+          <h2 id="collectionBandTitle">Коллекция динозавров</h2>
+          <p>Спасай яйца — и знакомься с новыми друзьями.</p>
+          <div class="collection-preview" id="collectionPreview"></div>
+        </div>
+        <button class="btn btn-secondary" id="openCollectionBtn" type="button">Посмотреть коллекцию →</button>
+      </section>
+
+      <footer class="app-footer">
+        <span>Для юных исследователей. Прогресс хранится в браузере.</span>
+        <button class="text-btn" id="resetProgressBtn" type="button">Сбросить прогресс</button>
+      </footer>
+    </section>
+
+    <section id="screen-learn" class="screen mode-screen" tabindex="-1" aria-labelledby="learnTitle">
+      <div class="mode-topbar">
+        <button class="btn btn-ghost back-btn" type="button" data-go-home>← В джунгли</button>
+        <div class="mode-chips">
+          <span class="chip">Число ×<b class="js-active-number">3</b></span>
+          <span class="chip">Шаг <b id="learnStepChip">1</b> из 10</span>
+        </div>
+      </div>
+      <div class="page-heading">
+        <span class="eyebrow">Режим 1 · Понимаем смысл</span>
+        <h2 id="learnTitle">Изучаем умножение на <span class="js-active-number">3</span></h2>
+        <p>Смотри на группы, потом читай сложение.</p>
+      </div>
+      <div class="learn-grid">
+        <article class="panel learn-panel">
+          <div class="big-equation" id="learnEquation" aria-live="polite"></div>
+          <div class="visual-caption">
+            <span>Группы предметов</span>
+            <span id="learnGroupsSummary"></span>
+          </div>
+          <div id="learnGroups"></div>
+          <div id="learnAddition"></div>
+          <div class="tip-card" id="learnTip"></div>
+          <div class="lesson-dots" id="learnDots" role="group" aria-label="Переход к примерам"></div>
+          <div class="lesson-nav">
+            <button class="btn btn-secondary" id="learnPrev" type="button">← Назад</button>
+            <button class="btn btn-soft-green" id="learnRemember" type="button">✅ Запомнить пример</button>
+            <button class="btn btn-primary" id="learnNext" type="button">Дальше →</button>
+          </div>
+        </article>
+        <aside class="mascot-panel">
+          <div class="speech" id="learnSpeech" role="status"></div>
+          <svg class="rex-svg rex-medium" viewBox="0 0 240 210" aria-hidden="true"><use href="#rex-mascot"></use></svg>
+          <div class="insight-box" id="learnInsight"></div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="screen-feed" class="screen mode-screen" tabindex="-1" aria-labelledby="feedTitle">
+      <div class="mode-topbar">
+        <button class="btn btn-ghost back-btn" type="button" data-go-home>← В джунгли</button>
+        <div class="mode-chips">
+          <span class="chip">Число ×<b class="js-active-number">3</b></span>
+          <span class="chip">Перетащи ответ взглядом 😊</span>
+        </div>
+      </div>
+      <div class="page-heading">
+        <span class="eyebrow">Режим 2 · Выбираем ответ</span>
+        <h2 id="feedTitle">Покорми динозавра</h2>
+        <p>Найди лист с верным ответом — и Рекс пообедает.</p>
+      </div>
+      <div class="feed-grid">
+        <article class="panel feed-panel">
+          <div class="feed-topline">
+            <span class="chip chip-warm">🦖 Рекс проголодался</span>
+            <div class="score-row">
+              <span class="score-pill">Правильно: <b id="feedSolved">0</b></span>
+              <span class="score-pill">Серия: <b id="feedStreak">0</b></span>
+            </div>
+          </div>
+          <div class="feed-question" id="feedQuestion" aria-live="polite"></div>
+          <p class="feed-prompt">Какой лист подойдёт?</p>
+          <div class="leaf-options" id="feedOptions"></div>
+          <div class="feedback-line" id="feedFeedback" role="status"></div>
+          <div class="feed-actions">
+            <button class="btn btn-accent" id="feedHintBtn" type="button">💡 Подсказка Рекса</button>
+            <button class="btn btn-secondary" id="feedSkipBtn" type="button">🎲 Другой пример</button>
+          </div>
+          <div class="help-panel" id="feedHelp" hidden></div>
+        </article>
+        <aside class="mascot-panel">
+          <div class="speech" id="feedSpeech" role="status"></div>
+          <svg class="rex-svg rex-medium" viewBox="0 0 240 210" aria-hidden="true"><use href="#rex-mascot"></use></svg>
+          <div class="mini-tip">
+            <b>Подсказка</b>
+            <p>Нажми кнопку — покажу группы. Ответ досчитай сам.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="screen-save" class="screen mode-screen" tabindex="-1" aria-labelledby="saveTitle">
+      <div class="mode-topbar">
+        <button class="btn btn-ghost back-btn" type="button" data-go-home>← В джунгли</button>
+        <div class="mode-chips">
+          <span class="chip">Число ×<b class="js-active-number">3</b></span>
+          <span class="chip">Ввод ответа ⌨️</span>
+        </div>
+      </div>
+      <div class="page-heading">
+        <span class="eyebrow">Режим 3 · Вводим ответ</span>
+        <h2 id="saveTitle">Спаси яйцо</h2>
+        <p>Пять верных ответов — и вылупится динозавр. Ошибаться не страшно.</p>
+      </div>
+      <div class="save-grid">
+        <article class="panel save-panel">
+          <div class="save-hero">
+            <div class="rescue-scene" aria-hidden="true">
+              <span class="rescue-halo"></span>
+              <span class="rescue-egg" id="saveEgg">🥚</span>
+              <span class="rescue-star rescue-star-one">✨</span>
+              <span class="rescue-star rescue-star-two">⭐</span>
+            </div>
+            <div class="save-hero-copy">
+              <span class="eyebrow">Спасение яйца</span>
+              <h3>Правильных ответов: <span id="saveSeriesCount">0</span> из 5</h3>
+              <p id="saveSeriesText">Собери пять верных ответов.</p>
+              <div class="series-eggs" id="saveSeriesDots" role="group" aria-label="Прогресс спасения яйца"></div>
+            </div>
+          </div>
+          <div class="save-question-box">
+            <div class="save-expr" id="saveExpr" aria-live="polite"></div>
+            <div class="answer-display" id="saveAnswer" aria-live="polite">?</div>
+          </div>
+          <div class="feedback-line" id="saveFeedback" role="status"></div>
+          <div class="keypad" id="keypad" role="group" aria-label="Экранная цифровая клавиатура">
+            <button class="key" type="button" data-key="1">1</button>
+            <button class="key" type="button" data-key="2">2</button>
+            <button class="key" type="button" data-key="3">3</button>
+            <button class="key" type="button" data-key="4">4</button>
+            <button class="key" type="button" data-key="5">5</button>
+            <button class="key" type="button" data-key="6">6</button>
+            <button class="key" type="button" data-key="7">7</button>
+            <button class="key" type="button" data-key="8">8</button>
+            <button class="key" type="button" data-key="9">9</button>
+            <button class="key key-util" type="button" data-key="clear" aria-label="Стереть последнюю цифру">⌫</button>
+            <button class="key" type="button" data-key="0">0</button>
+            <button class="key key-check" type="button" data-key="check" aria-label="Проверить ответ">✓</button>
+          </div>
+          <div class="save-actions">
+            <button class="btn btn-accent" id="saveHintBtn" type="button">💡 Подсказка</button>
+            <button class="btn btn-secondary" id="saveSkipBtn" type="button">🎲 Другой пример</button>
+          </div>
+          <div class="help-panel" id="saveHelp" hidden></div>
+        </article>
+        <aside class="save-side">
+          <div class="mascot-panel">
+            <div class="speech" id="saveSpeech" role="status"></div>
+            <svg class="rex-svg rex-medium" viewBox="0 0 240 210" aria-hidden="true"><use href="#rex-mascot"></use></svg>
+            <div class="mini-tip">
+              <b>Клавиатура</b>
+              <p>Цифры, «Backspace» — стереть, «Enter» — проверить.</p>
+            </div>
+          </div>
+          <div class="panel collection-side">
+            <div class="side-head">
+              <h3>Твоя коллекция</h3>
+              <b id="saveCollectionCount">0/67</b>
+            </div>
+            <div class="collection-mini" id="saveCollection"></div>
+            <button class="btn btn-secondary btn-block" type="button" data-open-collection>Открыть коллекцию</button>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="screen-table" class="screen mode-screen" tabindex="-1" aria-labelledby="tableTitle">
+      <div class="mode-topbar">
+        <button class="btn btn-ghost back-btn" type="button" data-go-home>← В джунгли</button>
+        <div class="mode-chips">
+          <span class="chip">10 × 10</span>
+          <span class="chip">Наведи или нажми</span>
+        </div>
+      </div>
+      <div class="page-heading">
+        <span class="eyebrow">Режим 4 · Видим площадь</span>
+        <h2 id="tableTitle">Интерактивная таблица Пифагора</h2>
+        <p>Наведи на клетку — увидишь прямоугольник.</p>
+      </div>
+      <div class="pyth-layout">
+        <div class="panel pyth-panel">
+          <div class="pyth-wrap">
+            <div class="pyth-grid" id="pythTable" role="grid" aria-label="Таблица умножения от 1 до 10"></div>
+          </div>
+          <p class="pyth-hint">💡 Коснись клетки или наведи мышку.</p>
+        </div>
+        <aside class="panel table-info" aria-live="polite">
+          <span class="eyebrow">Прямоугольник умножения</span>
+          <div class="table-equation" id="tableEquation"></div>
+          <div class="table-addition" id="tableAddition"></div>
+          <p class="table-area-text" id="tableAreaText"></p>
+          <div class="table-commutative" id="tableCommutative"></div>
+          <div class="mascot-inline">
+            <svg class="rex-svg rex-small" viewBox="0 0 240 210" aria-hidden="true"><use href="#rex-mascot"></use></svg>
+            <div class="speech speech-small" id="tableSpeech" role="status"></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="screen-lab" class="screen mode-screen" tabindex="-1" aria-labelledby="labTitle">
+      <div class="mode-topbar">
+        <button class="btn btn-ghost back-btn" type="button" data-go-home>← В джунгли</button>
+        <div class="mode-chips">
+          <span class="chip">Свободный режим</span>
+          <span class="chip">Смотри и экспериментируй</span>
+        </div>
+      </div>
+      <div class="page-heading">
+        <span class="eyebrow">Лаборатория умножения</span>
+        <h2 id="labTitle">Ставь опыты с Рексом</h2>
+        <p>Двигай ползунки и меняй числа местами.</p>
+      </div>
+      <div class="lab-grid">
+        <article class="panel lab-controls">
+          <div class="control-block">
+            <label for="labARange">Сколько групп?</label>
+            <div class="control-value"><output id="labAValue">3</output><span>гнезда</span></div>
+            <div class="stepper-row">
+              <button class="step-btn" type="button" data-lab-step="a" data-delta="-1" aria-label="Меньше групп">−</button>
+              <input type="range" id="labARange" min="1" max="10" value="3" aria-label="Количество групп">
+              <button class="step-btn" type="button" data-lab-step="a" data-delta="1" aria-label="Больше групп">+</button>
+            </div>
+          </div>
+          <div class="control-block">
+            <label for="labBRange">Сколько яиц в каждом гнезде?</label>
+            <div class="control-value control-value-warm"><output id="labBValue">4</output><span>яйца</span></div>
+            <div class="stepper-row">
+              <button class="step-btn" type="button" data-lab-step="b" data-delta="-1" aria-label="Меньше яиц">−</button>
+              <input type="range" id="labBRange" min="1" max="10" value="4" aria-label="Количество яиц в группе">
+              <button class="step-btn" type="button" data-lab-step="b" data-delta="1" aria-label="Больше яиц">+</button>
+            </div>
+          </div>
+          <div class="lab-actions">
+            <button class="btn btn-primary btn-block" id="labSwap" type="button">🔁 Поменять местами</button>
+            <button class="btn btn-secondary btn-block" id="labRandom" type="button">🎲 Случайный пример</button>
+          </div>
+          <div class="mini-tip">
+            <b>Как это работает?</b>
+            <p>Первое число — группы. Второе — яйца в каждой группе.</p>
+          </div>
+        </article>
+        <article class="panel lab-result">
+          <div class="lab-equation" id="labEquation" aria-live="polite"></div>
+          <div class="addition-card" id="labAddition"></div>
+          <div class="visual-caption">
+            <span>Группы яиц</span>
+            <span id="labGroupsSummary"></span>
+          </div>
+          <div id="labGroups"></div>
+          <div class="lab-arrays-wrap">
+            <div class="lab-arrays" id="labArrays"></div>
+            <p class="lab-commutative">Меняем местами — яиц столько же!</p>
+          </div>
+        </article>
+        <aside class="mascot-panel lab-mascot">
+          <div class="speech" id="labSpeech" role="status"></div>
+          <svg class="rex-svg rex-medium" viewBox="0 0 240 210" aria-hidden="true"><use href="#rex-mascot"></use></svg>
+          <div class="mini-tip">
+            <b>Попробуй</b>
+            <p>Сделай 3 по 4. Потом поменяй местами. Что осталось?</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <div class="sr-only" id="liveRegion" aria-live="polite" aria-atomic="true"></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <div class="modal-backdrop" id="collectionModal" hidden>
+    <div class="modal-card collection-modal" role="dialog" aria-modal="true" aria-labelledby="collectionTitle" tabindex="-1">
+      <button class="modal-close" type="button" data-close-collection aria-label="Закрыть коллекцию">×</button>
+      <span class="eyebrow">Твоя коллекция</span>
+      <h2 id="collectionTitle">Динозавры Рекса</h2>
+      <p class="modal-subtitle" id="collectionSummary"></p>
+      <div class="collection-grid" id="collectionGrid"></div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="rewardModal" hidden>
+    <div class="modal-card reward-modal" role="dialog" aria-modal="true" aria-labelledby="rewardTitle" tabindex="-1">
+      <div class="reward-burst" aria-hidden="true"></div>
+      <div class="reward-stage" id="rewardStage" aria-hidden="true"></div>
+      <span class="eyebrow">Новый друг в коллекции</span>
+      <h2 id="rewardTitle">Новый динозавр</h2>
+      <p class="reward-fact" id="rewardFact"></p>
+      <button class="btn btn-primary btn-lg" id="rewardCloseBtn" type="button">Ура! Продолжить</button>
+    </div>
+  </div>
+</body>
+</html>
