@@ -2,7 +2,9 @@
 
 Интерактивный тренажёр таблицы умножения для детей. Внутри — динозаврик Рекс, группы яиц, сложение, игры и коллекция из 67 динозавров.
 
-**Живая версия:** https://mr-miha.github.io/ymnoghenie/
+**Репозиторий:** https://github.com/Mr-Miha/ymnoghenie
+
+**Живая версия:** включите GitHub Pages в Settings → Pages → Deploy from a branch → `main` / `root`. После этого приложение откроется по адресу https://mr-miha.github.io/ymnoghenie/
 
 ## Что внутри
 
